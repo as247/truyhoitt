@@ -8,3 +8,7 @@ www.superstreetonline.com	FALSE	/	FALSE	0	ZDEDebuggerPresent	php,phtml,php3
 .vnexpress.net	TRUE	/	FALSE	1417079739	device_env	4
 #HttpOnly_.baomoi.com	TRUE	/	FALSE	1422475136	.ASPXANONYMOUS	sK2N2TQ70AEkAAAAYTk0MTc2MmUtZTcxMi00NzhlLTg5NTMtNmZkZTlkZDVlZmVh0
 .baomoi.com	TRUE	/	FALSE	0	ASP.NET_SessionId	
+www.baomoi.com	FALSE	/	FALSE	0	MostPopularBlock-FixPosition-0	,4587,
+www.baomoi.com	FALSE	/	FALSE	0	MostPopularBlock0-0	|4603|
+www.baomoi.com	FALSE	/	FALSE	0	MostPopularBlock0-4	|4563|
+www.thanhnien.com.vn	FALSE	/	FALSE	0	TSe010b5	67e5d963c12443bcceaf747c0b67fe726aac626d5b076ae55470c38f

@@ -317,3 +317,13 @@ function timer_stop( $display = 0, $precision = 3 ) { // if called like timer_st
         echo $r;
     return $r;
 }
+
+/**
+ * Jaccard hashing
+ * @var String $value
+ * @var String $salt
+ * @return int
+ */
+function j_hash($value,$salt=''){
+    return min(4294967295,max(1,crc32($value.$salt)+2147483647));
+}
