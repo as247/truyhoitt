@@ -53,25 +53,25 @@ Matched content: <a target="_blank" href="<?php echo $matchedDoc->url;?>"><?php 
     Hash functions:
     <pre>
     //1
-    function($x){return 500000-(floor($x*$x/500000+2*$x)+5)%500000;},
+    function($x){return j_hash($x,'Jw2YjWure7');},
     //2
-    function($x){return 500000-(3*$x+7)%500000;},
+    function($x){return j_hash($x,'FdK56YQrQb');},
     //3
-    function($x){return absint((65536*$x+11))%500000;},
+    function($x){return j_hash($x,'9zKlCur6Og');},
     //4
-    function($x){return absint((16777216*$x+110))%500000;},
+    function($x){return j_hash($x,'PDsbTaWPf2');},
     //5
-    function($x){return (16777216-(101*$x+127)%500000)%500000;},
+    function($x){return j_hash($x,'Qyut1hfiL6');},
     //6
-    function($x){return (41*$x+250000)%500000;},
+    function($x){return j_hash($x,'BCjfGqhdBw');},
     //7
-    function($x){return (9*$x+123456)%500000;},
+    function($x){return j_hash($x,'lgH9BQ1pwF');},
     //8
-    function($x){return (15*$x+400000)%500000;},
+    function($x){return j_hash($x,'W9Z5lwWr59');},
     //9
-    function($x){return (floor($x*$x/500000)+431110)%500000;},
+    function($x){return j_hash($x,'6MxvGSi7k6');},
     //10
-    function($x){return (256*$x+30000)%500000;},
+    function($x){return j_hash($x,'vhHftmQEZG');},
     </pre>
 
 

@@ -324,6 +324,17 @@ function timer_stop( $display = 0, $precision = 3 ) { // if called like timer_st
  * @var String $salt
  * @return int
  */
+
 function j_hash($value,$salt=''){
-    return min(4294967295,max(1,crc32($value.$salt)+2147483647));
+    $value=crcKw($value.$salt)+2147483647;
+    return min(4294967295,max(1,$value));
+}
+function crcKw($num){
+    $crc = crc32($num);
+    if($crc & 0x80000000){
+        $crc ^= 0xffffffff;
+        $crc += 1;
+        $crc = -$crc;
+    }
+    return $crc;
 }
