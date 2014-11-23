@@ -82,6 +82,13 @@ class App{
     function updateDocIdentifier($docID){
         return $this->jaccard->updateDocIdentifier($docID,$this->shingleLength);
     }
+    function updateShingles($docID){
+        $doc=$this->cdb->get_var($this->cdb->prepare("select content from docs where ID=%d limit 1",$docID));
+        if(!$doc){
+            return false;
+        }
+        return $this->jaccard->shingle->getDocShingles($doc,$this->shingleLength);
+    }
     function log($message){
         file_put_contents(DIR.'add.log',$message.PHP_EOL,FILE_APPEND);
     }

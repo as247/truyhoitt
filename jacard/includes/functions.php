@@ -326,7 +326,7 @@ function timer_stop( $display = 0, $precision = 3 ) { // if called like timer_st
  */
 
 function j_hash($value,$salt=''){
-    $value=unsigned_crc32($value.$salt)+2147483647;
+    $value=unsigned_crc32($value.$salt);
     return min(4294967295,max(1,$value));
 }
 
@@ -342,5 +342,6 @@ function unsigned_crc32($num){
         $crc += 1;
         $crc = -$crc;
     }
+    $crc+=2147483647;
     return $crc;
 }
