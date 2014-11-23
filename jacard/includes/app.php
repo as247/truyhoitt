@@ -1,6 +1,7 @@
 <?php
 class App{
     var $shingleLength=2;
+    var $shingleLengths=array(2,3);
     var $matchThreshold=0.5;
     var $doc;
     /**
@@ -53,17 +54,21 @@ class App{
         if(empty($doc['content'])){
             return false;
         }
-        if($check&&$matchedDoc=$this->jaccard->setDoc($doc['content'])->getMatchedDoc($this->matchThreshold,$this->shingleLength)){
+        $this->lastMatchedDoc=false;
+        if($check&&$matchedDoc=$this->checkDocByContent($doc['content'])){
             $this->log(sprintf("Matches doc found: ".$matchedDoc['id']));
             $this->lastMatchedDoc=$matchedDoc;
             return false;
         }
         if($doc_id=$this->cdb->insert('docs',$doc)){
-            //$this->jaccard->updateDocIdentifier($doc_id);
+            $this->updateDocIdentifier($doc_id);
+            return $doc_id;
         }
+        return false;
     }
     function checkDoc($url_or_content){
         $url_or_content=trim($url_or_content);
+        $this->doc='';
         if(strpos($url_or_content,'http://')===0||strpos($url_or_content,'https://')===0){
             return $this->checkDocByUrl($url_or_content);
         }
@@ -80,7 +85,7 @@ class App{
         return $this->jaccard->setDoc($content)->getMatchedDoc($this->matchThreshold,$this->shingleLength);
     }
     function updateDocIdentifier($docID){
-        return $this->jaccard->updateDocIdentifier($docID,$this->shingleLength);
+        return $this->jaccard->updateDocIdentifier($docID,$this->shingleLengths);
     }
     function updateShingles($docID){
         $doc=$this->cdb->get_var($this->cdb->prepare("select content from docs where ID=%d limit 1",$docID));
@@ -88,6 +93,10 @@ class App{
             return false;
         }
         return $this->jaccard->shingle->getDocShingles($doc,$this->shingleLength);
+    }
+    function clear(){
+        $this->doc='';
+        $this->lastMatchedDoc='';
     }
     function log($message){
         file_put_contents(DIR.'add.log',$message.PHP_EOL,FILE_APPEND);

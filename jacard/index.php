@@ -76,7 +76,15 @@ Matched content: <a target="_blank" href="<?php echo $matchedDoc->url;?>"><?php 
 
 
 <?php else:?>
-    No doc matched
+    <p style="color:green;font-weight: bold;">No doc matched</p>
+    <?php if($url&&$content):?>
+        <form method="post" action="add-doc.php">
+            <input type="hidden" name="url" value="<?php echo $url;?>"/>
+            <input type="hidden" name="shingleLength" value="<?php echo $app->shingleLength;?>">
+            <input type="submit" name="add_doc" value="Add this post to database"/>
+
+        </form>
+    <?php endif;?>
 <?php endif;?>
     <hr>
     Thời gian chạy: <?php timer_stop(1);?> giây

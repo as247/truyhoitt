@@ -88,7 +88,7 @@ class JACCARD{
     /**
      * update doc identifies
      * @param $docID
-     * @param $length
+     * @param array|int $length
      * @return int
      */
     function updateDocIdentifier($docID,$length=2){
