@@ -79,6 +79,9 @@ class App{
     function checkDocByContent($content){
         return $this->jaccard->setDoc($content)->getMatchedDoc($this->matchThreshold,$this->shingleLength);
     }
+    function updateDocIdentifier($docID){
+        return $this->jaccard->updateDocIdentifier($docID,$this->shingleLength);
+    }
     function log($message){
         file_put_contents(DIR.'add.log',$message.PHP_EOL,FILE_APPEND);
     }

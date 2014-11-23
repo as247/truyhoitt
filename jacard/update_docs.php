@@ -5,7 +5,8 @@ if(!isset($_GET['id']))
 $id=$_GET['id'];
 $page=$_GET['page'];
 $app=new App();
-if($app->jaccard->updateDocIdentifier($id)){
+$app->setShingleLength(3);
+if($app->updateDocIdentifier($id)){
     result_success();
 }else{
     //echo $cdb->last_query;
