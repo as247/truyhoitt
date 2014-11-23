@@ -319,17 +319,23 @@ function timer_stop( $display = 0, $precision = 3 ) { // if called like timer_st
 }
 
 /**
- * Jaccard hashing
+ * Jaccard hashing function
  * @var String $value
  * @var String $salt
  * @return int
  */
 
 function j_hash($value,$salt=''){
-    $value=crcKw($value.$salt)+2147483647;
+    $value=unsigned_crc32($value.$salt)+2147483647;
     return min(4294967295,max(1,$value));
 }
-function crcKw($num){
+
+/**
+ * Unsigned crc32
+ * @param $num
+ * @return int
+ */
+function unsigned_crc32($num){
     $crc = crc32($num);
     if($crc & 0x80000000){
         $crc ^= 0xffffffff;
