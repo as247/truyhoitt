@@ -92,7 +92,7 @@ class App{
         if(!$doc){
             return false;
         }
-        return $this->jaccard->shingle->getDocShingles($doc,$this->shingleLength);
+        return $this->jaccard->shingle->updateShingles($doc,$this->shingleLength);
     }
     function clear(){
         $this->doc='';

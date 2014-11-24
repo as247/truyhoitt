@@ -102,7 +102,7 @@ class JACCARD{
             $docIdentifies=$this->getDocIdentifier($shingleLength);
             for($i=0;$i<$this->m;$i++){
                 $index=$i+1;
-                $data["i{$length}$index"]=$docIdentifies[$i];
+                $data["i{$shingleLength}$index"]=$docIdentifies[$i];
             }
         }
         return $this->cdb->update('docs',$data,array('ID'=>$docID));

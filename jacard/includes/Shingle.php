@@ -47,6 +47,24 @@ class Shingle{
         }
         return $shingles;
     }
+    function updateShingles($doc,$length=2){
+        $words=$this->getDocWordShingles($doc,$length);
+        global $cdb;
+        $table=$this->getShingleTable($length);
+        if(!$table){
+            c_exit('could not get shingle table '.$table);
+        }
+        $shingles=array();
+        foreach((array)$words as $index=>$word){
+            if(!$id=$cdb->get_var($cdb->prepare("select ID from $table where word=%s",$word))){
+                $shingles[]='('.$cdb->prepare('%s',$word).')';
+            }
+        }
+        $values=join(',',$shingles);
+        $query="insert into `$table` (`word`) VALUES $values";
+        return $cdb->query($query);
+        //return $shingles;
+    }
 
     function getShingleTable($length){
         global $cdb;

@@ -2,8 +2,20 @@
 header('Content-Type: text/html; charset=utf-8');
 error_reporting(E_ALL);
 ini_set('display_errors',true);
+session_start();
+
 require_once 'c-config.php';
+if(isset($_POST['setShingleLength'])){
+    $_SESSION['shingle_length']=intval($_POST['setShingleLength']);
+    c_redirect('./');
+}
 $app=new App();
+if(isset($_SESSION['shingle_length'])){
+    $shingleLength=absint($_SESSION['shingle_length']);
+    if(in_array($shingleLength,$app->shingleLengths)){
+        $app->setShingleLength($shingleLength);
+    }
+}
 $url=isset($_GET['url'])?$_GET['url']:'';
 $input_content=isset($_POST['content'])?$_POST['content']:'';
 $doc=$url;
@@ -14,6 +26,21 @@ $check=$app->checkDoc($doc);
 $content=$app->doc;
 
 ?>
+<?php
+if(isset($_GET['message'])){
+    ?>
+    <div class="message" style="border: 1px solid #CCC;background-color:#FFE0AA;padding: 10px;text-align: center;width: 100%;max-width: 300px;margin: auto ">
+        <?php echo htmlspecialchars($_GET['message'],ENT_QUOTES);?>
+    </div>
+    <?php
+}
+?>
+<form action="index.php" method="post" name="setShingle">
+    <select name="setShingleLength" onchange="this.form.submit()">
+        <option value="2"<?php if($shingleLength==2) echo ' selected="selected"';?>>2-gram</option>
+        <option value="3"<?php if($shingleLength==3) echo ' selected="selected"';?>>3-gram</option>
+    </select>
+</form>
 <form action="" method="GET">
     <label for="url">Url:</label>
     <input id="url" type="text" style="width:100%;" name="url" value="<?php echo $url;?>"/>
