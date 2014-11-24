@@ -60,7 +60,8 @@ class App{
             $this->lastMatchedDoc=$matchedDoc;
             return false;
         }
-        if($doc_id=$this->cdb->insert('docs',$doc)){
+        if($this->cdb->insert('docs',$doc)){
+            $doc_id=$this->cdb->insert_id;
             $this->updateDocIdentifier($doc_id);
             return $doc_id;
         }
